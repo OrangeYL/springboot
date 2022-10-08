@@ -1,0 +1,13 @@
+server:
+  port: 9093
+
+spring:
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+    lettuce:
+      pool:
+        max-idle: 16
+        max-active: 32
+        min-idle: 8
