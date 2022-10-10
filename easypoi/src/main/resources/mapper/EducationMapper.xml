@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orange.easypoi.mapper.EducationMapper">
+    <resultMap id="educationMap" type="com.orange.easypoi.entity.Education">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="employer_id" property="employerId" jdbcType="INTEGER"/>
+        <result column="school_name" property="schoolName" jdbcType="VARCHAR"/>
+        <result column="record" property="record" jdbcType="INTEGER"/>
+        <result column="begin_time" property="beginTime" jdbcType="TIMESTAMP"/>
+        <result column="finish_time" property="finishTime" jdbcType="TIMESTAMP"/>
+        <result column="profession" property="profession" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    <insert id="insertBatch" parameterType="com.orange.easypoi.entity.Education">
+        insert into education(employer_id,school_name,record,begin_time,finish_time,profession) values
+        <foreach collection="list" separator="," item="item">
+            (#{item.employerId},#{item.schoolName},#{item.record},#{item.beginTime},#{item.finishTime},#{item.profession})
+        </foreach>
+    </insert>
+    <select id="selectByEmployerId" resultMap="educationMap">
+        select employer_id,school_name,record,begin_time,finish_time,profession from education
+        where employer_id=#{employerId}
+    </select>
+</mapper>

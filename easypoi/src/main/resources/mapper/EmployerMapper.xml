@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orange.easypoi.mapper.EmployerMapper">
+
+    <resultMap id="EmployerMap" type="com.orange.easypoi.entity.Employer">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="gender" property="gender" jdbcType="TINYINT"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="work_time" property="workTime" jdbcType="TIMESTAMP"/>
+        <result column="birth" property="birth" jdbcType="TIMESTAMP"/>
+        <result column="national" property="national" jdbcType="VARCHAR"/>
+        <result column="language_proficiency" property="languageProficiency" jdbcType="VARCHAR"/>
+        <result column="jobs_name" property="jobsName" jdbcType="VARCHAR"/>
+        <result column="category_name" property="categoryName" jdbcType="VARCHAR"/>
+        <result column="salary" property="salary" jdbcType="INTEGER"/>
+        <result column="work_area" property="workArea" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="insertBatch" parameterType="com.orange.easypoi.entity.Employer" useGeneratedKeys="true" keyProperty="id">
+        insert into employer(name,gender,phone,work_time,national,language_proficiency,birth,jobs_name,category_name,salary,work_area) values
+        <foreach collection="list" separator="," item="item">
+            (#{item.name},#{item.gender},#{item.phone},#{item.workTime},#{item.national},#{item.languageProficiency},#{item.birth},#{item.jobsName},
+            #{item.categoryName},#{item.salary},#{item.workArea})
+        </foreach>
+    </insert>
+
+    <select id="selectAll" resultMap="EmployerMap">
+        select id,name,gender,phone,work_time,national,language_proficiency,birth,jobs_name,category_name,salary,work_area from employer;
+    </select>
+</mapper>
