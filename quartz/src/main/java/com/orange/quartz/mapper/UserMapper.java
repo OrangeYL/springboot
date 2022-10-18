@@ -1,7 +1,7 @@
-package com.orange.mybatisplus.mapper;
+package com.orange.quartz.mapper;
 
-import com.orange.mybatisplus.entity.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.orange.quartz.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

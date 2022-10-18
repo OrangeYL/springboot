@@ -1,7 +1,7 @@
-package com.orange.mybatisplus.mapper;
+package com.orange.quartz.mapper;
 
-import com.orange.mybatisplus.entity.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.orange.quartz.entity.UserCopy;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -13,6 +13,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2022-10-08
  */
 @Mapper
-public interface UserMapper extends BaseMapper<User> {
+public interface UserCopyMapper extends BaseMapper<UserCopy> {
 
 }
