@@ -15,6 +15,7 @@
         <module>redis</module>
         <module>easypoi</module>
         <module>quartz</module>
+        <module>mail</module>
     </modules>
 
     <properties>

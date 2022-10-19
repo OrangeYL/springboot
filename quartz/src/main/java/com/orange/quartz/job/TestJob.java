@@ -27,13 +27,14 @@ public class TestJob implements Job {
     private IUserCopyService iUserCopyService;
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        List<User> list = userService.list();
-        ArrayList<UserCopy> userCopies = new ArrayList<>();
-        for (User user:list){
-          UserCopy userCopy = new UserCopy();
-          BeanUtils.copyProperties(user,userCopy);
-          userCopies.add(userCopy);
-        }
-        iUserCopyService.saveBatch(userCopies);
+//        List<User> list = userService.list();
+//        ArrayList<UserCopy> userCopies = new ArrayList<>();
+//        for (User user:list){
+//          UserCopy userCopy = new UserCopy();
+//          BeanUtils.copyProperties(user,userCopy);
+//          userCopies.add(userCopy);
+//        }
+//        iUserCopyService.saveBatch(userCopies);
+        log.info("你好呀，这里是定时任务测试！");
     }
 }

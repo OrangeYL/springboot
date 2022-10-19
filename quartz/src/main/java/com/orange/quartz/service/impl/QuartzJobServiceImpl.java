@@ -115,7 +115,7 @@ public class QuartzJobServiceImpl extends ServiceImpl<QuartzJobMapper, QuartzJob
      */
     @Override
     public boolean editAndScheduleJob(QuartzJob quartzJob) throws SchedulerException {
-        if (quartzJob.getStatus()==1) {
+        if (quartzJob.getStatus()==0) {
             schedulerDelete(quartzJob.getJobClassName().trim());
             schedulerAdd(quartzJob.getJobClassName().trim(), quartzJob.getCronExpression().trim());
         }else{

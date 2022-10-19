@@ -9,9 +9,11 @@
         <outputRelativeToContentRoot value="true" />
         <module name="easypoi" />
         <module name="common" />
+        <module name="mail" />
+        <module name="mybatis" />
+        <module name="quartz" />
         <module name="mybatisplus" />
         <module name="redis" />
-        <module name="mybatis" />
       </profile>
     </annotationProcessing>
   </component>
