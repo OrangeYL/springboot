@@ -16,6 +16,7 @@
         <module>easypoi</module>
         <module>quartz</module>
         <module>mail</module>
+        <module>shiro</module>
     </modules>
 
     <properties>

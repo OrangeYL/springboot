@@ -10,6 +10,7 @@
         <module name="easypoi" />
         <module name="common" />
         <module name="mail" />
+        <module name="shiro" />
         <module name="mybatis" />
         <module name="quartz" />
         <module name="mybatisplus" />
