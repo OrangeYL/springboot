@@ -48,7 +48,7 @@ public class JwtUtils {
             JWTVerifier verifier = JWT.require(algorithm).withClaim("username", username).build();
             //校验token
             verifier.verify(token);
-            log.info("验证成功");
+            log.info("第五步->验证成功");
             return true;
         } catch (Exception e) {
             log.info("验证失败");

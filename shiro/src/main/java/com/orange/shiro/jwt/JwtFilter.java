@@ -30,14 +30,14 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
      */
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
-        log.info("检查请求是否携带token");
+        log.info("第一步->检查请求是否携带token");
         if(isLoginAttempt(request,response)){//如为true，则代表携带token,进入executeLogin 方法，检查token是否正确
-            log.info("该请求携带token,进行token正确性检查");
+            log.info("第二步->该请求携带token,进行token正确性检查");
             try {
                 executeLogin(request, response);
                 return true;
             } catch (Exception e) {
-                throw new BizException("token无效或错误");
+                throw new AuthenticationException("token无效或错误");
             }
         }
         return false;
@@ -55,11 +55,11 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
         JwtToken jwtToken = new JwtToken(token);
         try {
             //交给自定义的realm对象去登录，如果错误他会抛出异常并被捕获
-            log.info("进行shiro认证");
+            log.info("第三步->进行shiro认证");
             getSubject(request,response).login(jwtToken);
             return true;
         } catch (AuthenticationException e) {
-            throw new BizException("shiro认证失败",e);
+            throw new AuthenticationException("shiro认证失败",e);
         }
     }
 

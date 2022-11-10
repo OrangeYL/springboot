@@ -55,7 +55,7 @@ public class ShiroRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         //权限认证
-       log.info("开始权限认证");
+       log.info("第六步->开始权限认证");
         //获取用户名
         String token = (String) SecurityUtils.getSubject().getPrincipal();
         String username = JwtUtils.getUsername(token);
@@ -87,7 +87,7 @@ public class ShiroRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        log.info("开始身份认证");
+        log.info("第四步->开始身份认证");
         //获取token
         String token = (String) authenticationToken.getCredentials();
         //创建字符串，存储用户信息
@@ -116,8 +116,11 @@ public class ShiroRealm extends AuthorizingRealm {
      * @return boolean
      */
     public boolean jwtTokenRefresh(String token, String userName, String password) {
-        String redisToken = (String) redisTemplate.opsForValue().get(token);
+        String redisToken = (String) redisTemplate.opsForValue().get("token");
         if (redisToken != null) {
+            if(!redisToken.equals(token)){
+                return false;
+            }
             if (!JwtUtils.verify(redisToken, userName, password)) {
                 String newToken = JwtUtils.sign(userName, password);
                 //设置redis缓存

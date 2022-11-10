@@ -17,7 +17,7 @@
         <module>quartz</module>
         <module>mail</module>
         <module>shiro</module>
-        <module>activity</module>
+        <module>security</module>
     </modules>
 
     <properties>

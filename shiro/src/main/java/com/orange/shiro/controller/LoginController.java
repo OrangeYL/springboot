@@ -38,21 +38,35 @@ public class LoginController {
         if(!"admin".equals(username)){
             return Result.error("用户不存在");
         }
+        if(!"123".equals(secret)){
+            return Result.error("密码错误");
+        }
         String token = JwtUtils.sign(username, secret);
-        redisTemplate.opsForValue().set(token,token, expireTime*2/100, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set("token",token, expireTime*2/100, TimeUnit.SECONDS);
         return Result.success(token);
     }
-    //该接口被拦截，需要验证token
+    /**
+     该接口被拦截，需要验证token
+     流程：访问该接口后，会进入JwtFilter的isAccessAllowed方法判断有没有携带token,如果没有就抛出异常
+          否则进入executeLogin方法，在这个方法里面调用getSubject方法进行shiro认证，即跳转到ShiroRealm
+          的doGetAuthenticationInfo(AuthenticationToken authenticationToken)方法，认证成功就返回
+          否则抛出异常。
+     **/
     @RequestMapping("/test")
     public Result<?> testToken(){
-        log.info("检查是否携带token");
         return Result.success(ResultEnum.SUCCESS);
     }
-    //该接口被拦截，需要验证token，并且需要“user:admin”权限
+    /**
+     该接口被拦截，需要验证token，并且需要“user:admin”权限
+     流程：访问该接口后，会进入JwtFilter的isAccessAllowed方法判断有没有携带token,如果没有就抛出异常
+          否则进入executeLogin方法，在这个方法里面调用getSubject方法进行shiro认证，即跳转到ShiroRealm
+          的doGetAuthenticationInfo(AuthenticationToken authenticationToken)方法，认证失败就抛出异常
+          否则进入ShiroRealm的doGetAuthorizationInfo(PrincipalCollection principalCollection)方法进行
+          授权认证，成功就返回，否则抛出异常。
+     **/
     @RequiresPermissions("user:admin")
     @RequestMapping("/permission")
     public Result<?> testPermission(){
-        log.info("检查是否有权限");
         return Result.success(ResultEnum.SUCCESS);
     }
 }
