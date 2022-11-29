@@ -46,10 +46,10 @@ public class GlobalExceptionHandler {
         } catch (JsonProcessingException jsonProcessingException) {
             jsonProcessingException.printStackTrace();
         }
-        log.error("<--异常堆栈信息-->");
-        StringWriter stringWriter = new StringWriter();
-        e.printStackTrace(new PrintWriter(stringWriter));
-        log.error(stringWriter.toString());
+//        log.error("<--异常堆栈信息-->");
+//        StringWriter stringWriter = new StringWriter();
+//        e.printStackTrace(new PrintWriter(stringWriter));
+//        log.error(stringWriter.toString());
         return result;
     }
 }
