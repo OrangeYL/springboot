@@ -35,7 +35,10 @@ public class Result<T> implements Serializable {
     }
     /**成功但不带数据**/
     public static <T> Result<T> success(){
-        return new Result<>();
+        Result<T> result = new Result<>();
+        result.setCode(ResultEnum.SUCCESS.getCode());
+        result.setMessage(ResultEnum.SUCCESS.getMsg());
+        return result;
     }
     /**成功但不带数据**/
     public static <T> Result<T> success(ResultEnum resultEnum){

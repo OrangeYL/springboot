@@ -18,6 +18,7 @@
         <module>mail</module>
         <module>shiro</module>
         <module>security</module>
+        <module>webSocket</module>
     </modules>
 
     <properties>
