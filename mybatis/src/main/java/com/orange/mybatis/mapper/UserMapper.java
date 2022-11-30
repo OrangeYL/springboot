@@ -3,6 +3,8 @@ package com.orange.mybatis.mapper;
 import com.orange.mybatis.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
  * @author: Li ZhiCheng
  * @create: 2022-09-2022/9/6 10:57
@@ -51,4 +53,6 @@ public interface UserMapper {
      * @return
      */
     int updateByPrimaryKey(User record);
+
+    List<User> queryList();
 }

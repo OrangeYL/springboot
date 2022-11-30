@@ -6,6 +6,8 @@ import com.orange.mybatis.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author: Li ZhiCheng
  * @create: 2022-09-2022/9/6 10:59
@@ -45,5 +47,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public int updateByPrimaryKey(User record) {
         return userMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public List<User> queryList() {
+        return userMapper.queryList();
     }
 }

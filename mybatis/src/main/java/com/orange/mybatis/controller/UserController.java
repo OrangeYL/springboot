@@ -3,12 +3,17 @@ package com.orange.mybatis.controller;
 import com.orange.common.exception.BizException;
 import com.orange.common.utils.Result;
 import com.orange.common.utils.ResultEnum;
+import com.orange.mybatis.async.AsyncTask;
 import com.orange.mybatis.entity.User;
 import com.orange.mybatis.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 /**
  * @author: Li ZhiCheng
@@ -23,6 +28,8 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private AsyncTask asyncTask;
 
     /**
      * @description: 插入数据
@@ -82,5 +89,25 @@ public class UserController {
         }
         log.info("请求结束");
         return Result.success(user);
+    }
+    /**
+     * @description: 测试异步查询任务
+     * @author: Li ZhiCheng
+     * @date: 2022/9/6 11:19
+     * @param: [id]
+     * @return: com.orange.springboot.utils.Result<com.orange.springboot.entity.User>
+     **/
+    @GetMapping
+    public void testAsync(){
+        long start = System.currentTimeMillis();
+        Future<List<User>> result = asyncTask.getUserList();
+        Future<List<User>> resultList = asyncTask.getList();
+        try {
+            List<User> users = result.get();
+            List<User> userList = resultList.get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        log.info("耗时："+ (System.currentTimeMillis()-start)+"毫秒");
     }
 }

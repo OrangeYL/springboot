@@ -3,6 +3,8 @@ package com.orange.mybatis.service;
 
 import com.orange.mybatis.entity.User;
 
+import java.util.List;
+
 /**
  * @author: Li ZhiCheng
  * @create: 2022-09-2022/9/6 10:58
@@ -50,4 +52,6 @@ public interface UserService {
      * @return
      */
     int updateByPrimaryKey(User record);
+
+    List<User> queryList();
 }
