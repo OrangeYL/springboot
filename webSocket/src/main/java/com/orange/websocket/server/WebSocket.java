@@ -43,7 +43,7 @@ public class WebSocket {
     public void onOpen(@PathParam("userId") String userId, Session session)
     {
         onlineNumber++;
-        log.info("现在来连接的客户id："+session.getId()+"用户名："+userId);
+        log.info("现在来连接的客户id："+session.getId()+"，用户名："+userId);
         this.userId = userId;
         this.session = session;
         try {
@@ -56,11 +56,9 @@ public class WebSocket {
 
             //把自己的信息加入到map当中去
             clients.put(userId, this);
-            log.info("有连接关闭！ 当前在线人数" + clients.size());
             //给自己发一条消息：告诉自己现在都有谁在线
             Map<String,Object> map2 = new HashMap<>();
             map2.put("messageType",3);
-            //移除掉自己
             Set<String> set = clients.keySet();
             map2.put("onlineUsers",set);
             sendMessageTo(JSON.toJSONString(map2),userId);
@@ -109,7 +107,7 @@ public class WebSocket {
     public void onMessage(String message, Session session)
     {
         try {
-            log.info("来自客户端消息：" + message+"客户端的id是："+session.getId());
+            log.info("来自客户端消息：" + message+"，客户端的id是："+session.getId());
             System.out.println("------------  :"+message);
             JSONObject jsonObject = JSON.parseObject(message);
             String textMessage = jsonObject.getString("message");
