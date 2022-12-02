@@ -15,6 +15,7 @@
         <module name="shiro" />
         <module name="mybatis" />
         <module name="quartz" />
+        <module name="exercise" />
         <module name="mybatisplus" />
         <module name="redis" />
       </profile>
