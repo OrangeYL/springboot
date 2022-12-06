@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.orange.common.utils.Result;
 import com.orange.common.utils.ResultEnum;
+import com.orange.mybatisplus.anotation.SysLog;
 import com.orange.mybatisplus.entity.User;
 import com.orange.mybatisplus.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,7 @@ public class UserController {
      * @return: com.orange.springboot.utils.Result<com.orange.springboot.entity.User>
      **/
     @PostMapping
+    @SysLog("插入数据")
     public Result<User> insert(@RequestBody User user){
         iUserService.save(user);
         return Result.success(ResultEnum.SUCCESS);
@@ -50,6 +52,7 @@ public class UserController {
      * @return: com.orange.springboot.utils.Result<java.util.List<com.orange.springboot.entity.User>>
      **/
     @GetMapping
+    @SysLog("列表查询")
     public Result<List<User>> listByCondition(@RequestBody(required = false) User user){
         QueryWrapper<User> wrapper = new QueryWrapper<>();
         if(user!=null){
@@ -66,6 +69,7 @@ public class UserController {
      * @return: com.orange.springboot.utils.Result<com.baomidou.mybatisplus.core.metadata.IPage<com.orange.springboot.entity.User>>
      **/
     @GetMapping("/page")
+    @SysLog("分页查询")
     public Result<IPage<User>> page(@RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
                                     @RequestParam(value = "pageSize",defaultValue = "10") int pageSize,
                                     @RequestParam(value = "name",required = false) String name){
