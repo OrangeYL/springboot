@@ -5,16 +5,19 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.orange.common.exception.BizException;
 import com.orange.common.utils.Result;
 import com.orange.common.utils.ResultEnum;
 import com.orange.mybatisplus.anotation.SysLog;
 import com.orange.mybatisplus.entity.User;
 import com.orange.mybatisplus.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,8 +43,26 @@ public class UserController {
      **/
     @PostMapping
     @SysLog("插入数据")
+    @Transactional(rollbackFor = Exception.class)
     public Result<User> insert(@RequestBody User user){
         iUserService.save(user);
+        return Result.success(ResultEnum.SUCCESS);
+    }
+    @PostMapping("/batch")
+    @SysLog("批量插入数据")
+    @Transactional(rollbackFor = Exception.class)
+    public Result<?> batchInsert(){
+        ArrayList<User> users = new ArrayList<>();
+        users.add(new User("test1",15,"test1"));
+        users.add(new User("test2",15,"test2"));
+        users.add(new User("test3",15,"test3"));
+        for(int i = 0;i<users.size();i++){
+            User user = users.get(i);
+            if(user.getName().equals("test2")){
+               throw new BizException("操作错误");
+            }
+            iUserService.save(user);
+        }
         return Result.success(ResultEnum.SUCCESS);
     }
     /**
