@@ -13,6 +13,7 @@
         <module name="common" />
         <module name="mail" />
         <module name="shiro" />
+        <module name="flowable" />
         <module name="mybatis" />
         <module name="quartz" />
         <module name="exercise" />

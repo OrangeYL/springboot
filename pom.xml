@@ -20,6 +20,7 @@
         <module>security</module>
         <module>webSocket</module>
         <module>exercise</module>
+        <module>flowable</module>
     </modules>
 
     <properties>

@@ -47,6 +47,13 @@ public class Result<T> implements Serializable {
         result.setMessage(resultEnum.getMsg());
         return result;
     }
+    /**成功但不带数据**/
+    public static <T> Result<T> success(String msg){
+        Result<T> result = new Result<>();
+        result.setCode(200);
+        result.setMessage(msg);
+        return result;
+    }
     /**失败,枚举错误**/
     public static <T> Result<T> error(ResultEnum resultEnum){
         Result<T> result = new Result<>();
