@@ -101,4 +101,28 @@ public class UserController {
         return Result.success(page1);
     }
 
+    @GetMapping("/queryPage")
+    public Result<?> queryPage(User user,
+                               @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
+                               @RequestParam(value = "pageSize",defaultValue = "10") int pageSize){
+        Page<User> page = new Page<>(pageNum, pageSize);
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        if(user.getName() != null){
+            queryWrapper.like("name",user.getName());
+        }
+        if(user.getAddress() != null){
+            queryWrapper.like("address",user.getAddress());
+        }
+        Page<User> userPage = iUserService.queryPage(page, queryWrapper);
+        return Result.success(userPage);
+    }
+    @GetMapping("/queryList")
+    public Result<?> queryList(@RequestParam("tableName") String tableName,
+                               @RequestParam("columnName") String columnName,
+                               @RequestParam("limit") Integer limit){
+        String sql =String.format("select %s from %s limit %s",columnName,tableName,limit);
+        List<String> users = iUserService.queryList(sql);
+        return Result.success(users);
+    }
+
 }

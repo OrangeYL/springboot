@@ -16,6 +16,9 @@ import java.time.LocalDateTime;
  * @author Li ZhiCheng
  * @since 2022-10-08
  */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
