@@ -8,4 +8,12 @@
     <select id="queryList" resultType="String">
         ${sql}
     </select>
+
+    <resultMap id="BaseMap" type="com.orange.mybatisplus.entity.User">
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="age" property="age" jdbcType="INTEGER"/>
+    </resultMap>
+    <select id="queryData" resultMap="BaseMap">
+        select name,age from user;
+    </select>
 </mapper>

@@ -21,4 +21,6 @@ public interface IUserService extends IService<User> {
     public Page<User> queryPage(Page<User> page, @Param(Constants.WRAPPER) Wrapper<User> queryWrapper);
 
     public List<String> queryList(@Param("sql") String sql);
+
+    public List<User> queryData();
 }

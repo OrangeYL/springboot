@@ -8,6 +8,7 @@ import com.orange.mybatisplus.service.IUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,5 +31,23 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     @Override
     public List<String> queryList(String sql) {
         return this.baseMapper.queryList(sql);
+    }
+
+    @Override
+    public List<User> queryData() {
+        return this.baseMapper.queryData();
+    }
+
+    public static void main(String[] args) {
+        List<Integer> integers = new ArrayList<>();
+        integers.add(1);
+        integers.add(2);
+        integers.add(3);
+        for(Integer num : integers){
+            System.out.print(num + " ");
+        }
+        System.out.println();
+        List<Integer> list = integers.subList(0, 0);
+        System.out.println(list.size());
     }
 }

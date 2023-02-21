@@ -24,4 +24,6 @@ public interface UserMapper extends BaseMapper<User> {
     public List<User> queryPage(Page<User> page, @Param(Constants.WRAPPER) Wrapper<?> queryWrapper);
 
     public List<String> queryList(@Param("sql") String sql);
+
+    public List<User> queryData();
 }

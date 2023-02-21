@@ -125,4 +125,10 @@ public class UserController {
         return Result.success(users);
     }
 
+    @GetMapping
+    public Result<?> queryData(){
+        List<User> users = iUserService.queryData();
+        return Result.success(users);
+    }
+
 }
